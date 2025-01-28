@@ -20,20 +20,27 @@ Goals:
   members who need it
 
 Milestones:
+
   Milestones for January:
+  
     ● Determine team members and roles
     ● Determine site map
+ 
   Milestone for February
+  
     ● Create design wireframes for websites
     ● Determine what backend functions and apis we want to use
     ● Design and construct database for keeping track of data
     ● Create basic prototype for transaction tracking
+  
   Milestone for March
+  
     ● Implement frontend design and functions and start connecting with backend
     ● Continue working on backend functions
     ● Create automatic reimbursement capabilities through financial vendors (venmo,
     zelle)
   Milestone for April
+   
     ● Finish connecting frontend with backend
     ● Make sure that the app is hosted
     ● Create event planning and categorization of charges to specific events
