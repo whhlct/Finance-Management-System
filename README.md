@@ -7,7 +7,9 @@ job for a treasurer, as they will no longer need to manually update budgets by a
 transactions to a spreadsheet.
 
 Stack:
+
   ● ReactJS for frontend
+  
   ● Golang + Python for backend
 
 Goals:
