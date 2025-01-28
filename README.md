@@ -5,15 +5,18 @@ create functions for tracking of individual budgets and analytics. We will also 
 automating reimbursements through venmo, zelle, etc. This system will automate much of the
 job for a treasurer, as they will no longer need to manually update budgets by adding
 transactions to a spreadsheet.
+
 Stack:
   ● ReactJS for frontend
   ● Golang + Python for backend
+
 Goals:
   1. Make an easy to use and interactive frontend for the app
   2. Create budget management system that allocates budget and keeps track of current
   total
   3. Create an automated reimbursement system that updates the budget and reimburses
   members who need it
+
 Milestones:
   Milestones for January:
     ● Determine team members and roles
