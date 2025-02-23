@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+.transaction-form, .transaction-list, .budget-tracker {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.transaction-form input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.transaction-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.transaction-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.transaction-list li:last-child {
+  border-bottom: none;
+}
+
+.income {
+  color: green;
+}
+
+.expense {
+  color: red;
+}
+
+button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
