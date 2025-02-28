@@ -44,3 +44,10 @@ Milestones:
     ● Finish connecting frontend with backend
     ● Make sure that the app is hosted
     ● Create event planning and categorization of charges to specific events
+
+
+# Instructions
+
+The Django backend server is located in the [finance-management-system/](finance-management-system/) directory.
+
+See the [backend documentation](finance-management-system/README.md) to get started.
