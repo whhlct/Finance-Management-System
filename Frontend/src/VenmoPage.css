@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+.venmo-form {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.venmo-form input {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.venmo-form button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.venmo-form button:hover {
+  background: #0056b3;
+}
+
+
+
