@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Hero from './components/Hero';
+import Hero from './components/hero';
 import BudgetControl from './components/BudgetControl';
 import InventoryControl from './components/InventoryControl';
 import TransactionForm from './components/TransactionForm';
