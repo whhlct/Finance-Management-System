@@ -9,7 +9,7 @@ const Hero = () => {
     <header className="hero">
       <div className="hero-content">
         <h1>Finance Management System</h1>
-        <p>Effortlessly track transactions, manage budgets, and optimize your inventory.</p>
+        <p>Track transactions, manage budgets, and control your inventory seamlessly.</p>
         <button onClick={scrollToContent}>Learn More</button>
       </div>
     </header>
