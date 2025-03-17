@@ -1,15 +1,17 @@
 import React from 'react';
+import Hero from './Components/hero';
+import BudgetControl from './Components/budgetcontrol';
+import InventoryControl from './Components/InventoryControl';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="hero">
-        <div className="hero-content">
-          <h1>Finance Management System</h1>
-          <p>Effortlessly track transactions, manage budgets, and plan for the future.</p>
-          <button onClick={() => alert('Getting Started!')}>Get Started</button>
-        </div>
-      </header>
+      <Hero />
+      <main className="main-content">
+        <BudgetControl />
+        <InventoryControl />
+      </main>
     </div>
   );
 }

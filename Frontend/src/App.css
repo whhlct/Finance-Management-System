@@ -1,4 +1,4 @@
-/* Reset some default browser styles */
+/* Reset and basic styling */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@ body, html {
   font-family: 'Arial', sans-serif;
 }
 
-/* Container for the app */
+/* App container */
 .App {
   text-align: center;
 }
@@ -60,5 +60,54 @@ body, html {
 }
 
 .hero button:hover {
+  background-color: #0056b3;
+}
+
+/* Main content styling */
+.main-content {
+  padding: 40px 20px;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Control section styling */
+.control-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.control-section h2 {
+  margin-bottom: 15px;
+}
+
+.control-section p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.button-group button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
   background-color: #0056b3;
 }
