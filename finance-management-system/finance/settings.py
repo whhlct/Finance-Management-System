@@ -27,8 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'localhost:8000'
-    'localhost:9000'
+    'localhost:8000',
+    'localhost:9000',
+    '127.0.0.1'
 ]
 
 
