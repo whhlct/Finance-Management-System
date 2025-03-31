@@ -187,11 +187,10 @@ body, html {
 }
 
 .transaction-list li {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 10px;
   align-items: center;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
 }
 
 .transaction-list li:last-child {
@@ -229,4 +228,56 @@ body, html {
 
 .transaction-list button:hover {
   background-color: #c82333;
+}
+
+/* Budget Categories Styling */
+.budget-categories {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.budget-category {
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.budget-category:last-child {
+  border-bottom: none;
+}
+
+/* Form Elements */
+select {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  background-color: white;
+}
+
+.transaction-form select,
+.custom-adjust select {
+  margin-bottom: 10px;
+}
+
+.category {
+  font-size: 0.85em;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.button-group button {
+  padding: 10px;
 }

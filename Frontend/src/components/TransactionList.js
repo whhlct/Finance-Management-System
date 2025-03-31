@@ -11,6 +11,7 @@ const TransactionList = ({ transactions, deleteTransaction }) => {
           {transactions.map((transaction) => (
             <li key={transaction.id}>
               <span className="description">{transaction.description}</span>
+              <span className="category">{transaction.category}</span>
               <span className={`amount ${transaction.amount < 0 ? 'expense' : 'income'}`}>
                 ${transaction.amount.toFixed(2)}
               </span>
