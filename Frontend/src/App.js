@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Hero from './components/hero';
-import BudgetControl from './components/BudgetControl';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 import './App.css';
@@ -25,6 +24,7 @@ function App() {
   });
   
   const [transactions, setTransactions] = useState([]);
+  const [activeCategory, setActiveCategory] = useState('all');
 
   // Calculate total budget
   const totalBudget = Object.values(budgets).reduce((sum, amount) => sum + amount, 0);
@@ -52,7 +52,7 @@ function App() {
     setTransactions(transactions.filter((t) => t.id !== id));
   };
 
-  // Function for direct budget adjustment (from BudgetControl)
+  // Function for direct budget adjustment
   const adjustBudget = (category, amount) => {
     setBudgets({
       ...budgets,
@@ -60,26 +60,90 @@ function App() {
     });
   };
 
+  // Filter transactions by category if a specific one is selected
+  const filteredTransactions = activeCategory === 'all' 
+    ? transactions 
+    : transactions.filter(t => t.category === activeCategory);
+
   return (
     <div className="App">
-      <Hero />
+      <Hero totalBudget={totalBudget} categoriesCount={budgetCategories.length} />
       <main className="main-content">
-        <section className="controls">
-          <BudgetControl 
-            budgets={budgets} 
-            totalBudget={totalBudget} 
-            adjustBudget={adjustBudget} 
-            categories={budgetCategories} 
-          />
-        </section>
+        <div className="budget-overview">
+          <h2>Total Budget: ${totalBudget.toFixed(2)}</h2>
+          <div className="budget-tabs">
+            <button 
+              className={activeCategory === 'all' ? 'active' : ''} 
+              onClick={() => setActiveCategory('all')}
+            >
+              All Categories
+            </button>
+            {budgetCategories.map(category => (
+              <button 
+                key={category}
+                className={activeCategory === category ? 'active' : ''}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="budget-details">
+          {activeCategory === 'all' ? (
+            <div className="budget-cards">
+              {budgetCategories.map(category => (
+                <div key={category} className="budget-card">
+                  <h3>{category}</h3>
+                  <p className="budget-amount">${budgets[category].toFixed(2)}</p>
+                  <div className="budget-controls">
+                    <button onClick={() => adjustBudget(category, -50)}>-$50</button>
+                    <button onClick={() => adjustBudget(category, 50)}>+$50</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="single-budget">
+              <h3>{activeCategory} Budget</h3>
+              <p className="budget-amount">${budgets[activeCategory].toFixed(2)}</p>
+              <div className="budget-adjustment">
+                <input 
+                  type="number" 
+                  placeholder="Enter amount" 
+                  id="budgetAmount" 
+                />
+                <button onClick={() => {
+                  const amount = parseFloat(document.getElementById('budgetAmount').value);
+                  if (!isNaN(amount)) {
+                    adjustBudget(activeCategory, amount);
+                    document.getElementById('budgetAmount').value = '';
+                  }
+                }}>
+                  Adjust Budget
+                </button>
+              </div>
+              <div className="budget-quickactions">
+                <button onClick={() => adjustBudget(activeCategory, -100)}>-$100</button>
+                <button onClick={() => adjustBudget(activeCategory, -50)}>-$50</button>
+                <button onClick={() => adjustBudget(activeCategory, 50)}>+$50</button>
+                <button onClick={() => adjustBudget(activeCategory, 100)}>+$100</button>
+              </div>
+            </div>
+          )}
+        </div>
+
         <section className="transactions">
           <TransactionForm 
             addTransaction={addTransaction} 
             categories={budgetCategories} 
+            defaultCategory={activeCategory !== 'all' ? activeCategory : budgetCategories[0]}
           />
           <TransactionList 
-            transactions={transactions} 
+            transactions={filteredTransactions} 
             deleteTransaction={deleteTransaction} 
+            title={activeCategory === 'all' ? 'All Transactions' : `${activeCategory} Transactions`}
           />
         </section>
       </main>
