@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .models import Transaction
+from .models import Transaction, Account
 
 # Create your views here.
 def index(request):
@@ -12,3 +12,12 @@ def index(request):
     }
 
     return render(request, "ledger/index.html", context)
+
+def accounts(request):
+    accounts = Account.objects.all()
+    context = {
+        "accounts": accounts,
+        "account_count": accounts.count()
+    }
+
+    return render(request, "ledger/accounts.html", context)
