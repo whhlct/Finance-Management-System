@@ -1,57 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const TransactionForm = ({ addTransaction, categories }) => {
+const TransactionForm = ({ addTransaction, categories, defaultCategory }) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(defaultCategory || categories[0]);
+
+  // Update category if defaultCategory changes
+  useEffect(() => {
+    if (defaultCategory) {
+      setCategory(defaultCategory);
+    }
+  }, [defaultCategory]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const parsedAmount = parseFloat(amount);
-    if (description && !isNaN(parsedAmount) && category) {
+    
+    const amountNum = parseFloat(amount);
+    
+    if (description.trim() !== '' && !isNaN(amountNum)) {
       const newTransaction = {
-        id: Date.now(),
+        id: Math.floor(Math.random() * 1000000),
         description,
-        amount: parsedAmount,
+        amount: amountNum,
         category,
+        date: new Date().toISOString()
       };
+      
       addTransaction(newTransaction);
       setDescription('');
       setAmount('');
-      setCategory(categories[0]);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="transaction-form">
-      <h2>Add Transaction</h2>
-      <input
-        type="text"
-        placeholder="Description (e.g., Rent, Salary)"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      />
-      <input
-        type="number"
-        placeholder="Amount (negative for expense)"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        required
-      />
-      <select 
-        value={category} 
-        onChange={(e) => setCategory(e.target.value)}
-        required
-      >
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-      <button type="submit">Add Transaction</button>
-    </form>
+    <div className="transaction-form">
+      <h2>Add New Transaction</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <input
+            type="text"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="number"
+            placeholder="Amount (use - for expenses)"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <select 
+            value={category} 
+            onChange={(e) => setCategory(e.target.value)}
+            className="category"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
+        <button type="submit">Add Transaction</button>
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Hero = () => {
+const Hero = ({ totalBudget = 1000, categoriesCount = 5 }) => {
   const scrollToContent = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
@@ -8,24 +8,24 @@ const Hero = () => {
   return (
     <header className="hero">
       <div className="hero-content">
-        <h1>Finance Management System</h1>
-        <p>Efficiently manage your organization's budgets across departments with our powerful tracking tools.</p>
+        <h1>Fraternity Finance Tracker</h1>
+        <p>Easily track and manage our chapter's finances - no more spreadsheet headaches!</p>
         <div className="hero-buttons">
-          <button onClick={scrollToContent} className="primary-btn">Get Started</button>
-          <button onClick={scrollToContent} className="secondary-btn">Learn More</button>
+          <button onClick={scrollToContent} className="primary-btn">Manage Budget</button>
+          <button onClick={scrollToContent} className="secondary-btn">View Transactions</button>
         </div>
         <div className="hero-stats">
           <div className="stat-item">
-            <span className="stat-number">5</span>
+            <span className="stat-number">{categoriesCount}</span>
             <span className="stat-label">Budget Categories</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number">100%</span>
-            <span className="stat-label">Transparency</span>
+            <span className="stat-number">${totalBudget.toFixed(2)}</span>
+            <span className="stat-label">Total Budget</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number">24/7</span>
-            <span className="stat-label">Access</span>
+            <span className="stat-number">27</span>
+            <span className="stat-label">Brotherhood Size</span>
           </div>
         </div>
       </div>
