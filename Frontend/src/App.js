@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import Hero from './components/hero';
-import TransactionForm from './components/TransactionForm';
-import TransactionList from './components/TransactionList';
+import Hero from './Components/hero';
+import TransactionForm from './Components/TransactionForm';
+import TransactionList from './Components/TransactionList';
+import BudgetControl from './Components/BudgetControl';
+import InventoryControl from './Components/InventoryControl';
 import './App.css';
 
 function App() {
