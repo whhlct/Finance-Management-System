@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import Hero from './Components/hero';
-import TransactionForm from './Components/TransactionForm';
-import TransactionList from './Components/TransactionList';
-import BudgetControl from './Components/BudgetControl';
-import InventoryControl from './Components/InventoryControl';
+import React, { useState, useEffect } from 'react';
+import Hero from './components/hero';
+import TransactionForm from './components/TransactionForm';
+import TransactionList from './components/TransactionList';
 import './App.css';
+
+// Import template data
+import budgetTemplatesData from './data/budgetTemplates.json';
+import transactionTemplatesData from './data/transactionTemplates.json';
 
 function App() {
   // Define budget categories
@@ -17,23 +19,34 @@ function App() {
   ];
 
   // State for each budget category
-  const [budgets, setBudgets] = useState({
-    Recruitment: 200,
-    Brotherhood: 200,
-    Alumni: 200,
-    'Health and Safety': 200,
-    General: 200
-  });
+  const [budgets, setBudgets] = useState(budgetTemplatesData.defaultBudgets);
   
   const [transactions, setTransactions] = useState([]);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [customIncrement, setCustomIncrement] = useState('');
+  const [selectedBudgetPreset, setSelectedBudgetPreset] = useState('');
+
+  // Load template transactions
+  useEffect(() => {
+    setTransactions(transactionTemplatesData.transactions);
+  }, []);
 
   // Calculate total budget
   const totalBudget = Object.values(budgets).reduce((sum, amount) => sum + amount, 0);
 
   // When a transaction is added, update the transaction history and adjust the budget.
   const addTransaction = (transaction) => {
-    setTransactions([transaction, ...transactions]);
+    // Generate a new unique ID based on the highest existing ID
+    const highestId = transactions.length > 0 
+      ? Math.max(...transactions.map(t => t.id)) 
+      : 0;
+      
+    const newTransaction = {
+      ...transaction,
+      id: highestId + 1
+    };
+
+    setTransactions([newTransaction, ...transactions]);
     
     // Update the specific budget category
     setBudgets({
@@ -54,12 +67,31 @@ function App() {
     setTransactions(transactions.filter((t) => t.id !== id));
   };
 
-  // Function for direct budget adjustment
+  // Function for direct budget adjustment with custom amount
   const adjustBudget = (category, amount) => {
+    const newAmount = budgets[category] + amount;
+    // Prevent negative budgets, minimum is zero
     setBudgets({
       ...budgets,
-      [category]: budgets[category] + amount
+      [category]: newAmount >= 0 ? newAmount : 0
     });
+  };
+
+  // Function to apply a custom increment to a budget
+  const applyCustomIncrement = (category, customValue) => {
+    const amount = parseFloat(customValue);
+    if (!isNaN(amount)) {
+      adjustBudget(category, amount);
+      setCustomIncrement('');
+    }
+  };
+
+  // Function to apply a budget preset
+  const applyBudgetPreset = (presetName) => {
+    const preset = budgetTemplatesData.budgetPresets.find(p => p.name === presetName);
+    if (preset) {
+      setBudgets(preset.budgets);
+    }
   };
 
   // Filter transactions by category if a specific one is selected
@@ -73,6 +105,32 @@ function App() {
       <main className="main-content">
         <div className="budget-overview">
           <h2>Total Budget: ${totalBudget.toFixed(2)}</h2>
+          
+          <div className="budget-presets">
+            <h3>Budget Presets</h3>
+            <div className="preset-selector">
+              <select 
+                value={selectedBudgetPreset} 
+                onChange={(e) => setSelectedBudgetPreset(e.target.value)}
+              >
+                <option value="">Select Budget Preset</option>
+                {budgetTemplatesData.budgetPresets.map((preset, index) => (
+                  <option key={index} value={preset.name}>{preset.name}</option>
+                ))}
+              </select>
+              <button 
+                onClick={() => {
+                  if (selectedBudgetPreset) {
+                    applyBudgetPreset(selectedBudgetPreset);
+                  }
+                }}
+                disabled={!selectedBudgetPreset}
+              >
+                Apply Preset
+              </button>
+            </div>
+          </div>
+          
           <div className="budget-tabs">
             <button 
               className={activeCategory === 'all' ? 'active' : ''} 
@@ -99,6 +157,28 @@ function App() {
                 <div key={category} className="budget-card">
                   <h3>{category}</h3>
                   <p className="budget-amount">${budgets[category].toFixed(2)}</p>
+                  <div className="custom-increment">
+                    <input
+                      type="number"
+                      placeholder="Custom amount"
+                      value={customIncrement}
+                      onChange={(e) => setCustomIncrement(e.target.value)}
+                    />
+                    <div className="increment-buttons">
+                      <button 
+                        onClick={() => applyCustomIncrement(category, '-' + Math.abs(parseFloat(customIncrement) || 0))}
+                        disabled={!customIncrement}
+                      >
+                        -
+                      </button>
+                      <button 
+                        onClick={() => applyCustomIncrement(category, Math.abs(parseFloat(customIncrement) || 0))}
+                        disabled={!customIncrement}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
                   <div className="budget-controls">
                     <button onClick={() => adjustBudget(category, -50)}>-$50</button>
                     <button onClick={() => adjustBudget(category, 50)}>+$50</button>
@@ -123,7 +203,16 @@ function App() {
                     document.getElementById('budgetAmount').value = '';
                   }
                 }}>
-                  Adjust Budget
+                  Add to Budget
+                </button>
+                <button onClick={() => {
+                  const amount = parseFloat(document.getElementById('budgetAmount').value);
+                  if (!isNaN(amount)) {
+                    adjustBudget(activeCategory, -amount);
+                    document.getElementById('budgetAmount').value = '';
+                  }
+                }}>
+                  Subtract from Budget
                 </button>
               </div>
               <div className="budget-quickactions">

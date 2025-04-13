@@ -1,0 +1,109 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Rush Week Food",
+      "amount": -850.75,
+      "category": "Recruitment",
+      "date": "2023-09-05T18:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "description": "Chapter Dues Collection",
+      "amount": 3200.00,
+      "category": "General",
+      "date": "2023-09-10T14:15:00.000Z"
+    },
+    {
+      "id": 3,
+      "description": "Alumni Dinner Venue",
+      "amount": -1200.00,
+      "category": "Alumni",
+      "date": "2023-09-15T20:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "description": "Brotherhood Retreat",
+      "amount": -1500.50,
+      "category": "Brotherhood",
+      "date": "2023-09-18T09:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "description": "First Aid Kits",
+      "amount": -350.25,
+      "category": "Health and Safety",
+      "date": "2023-09-20T12:45:00.000Z"
+    },
+    {
+      "id": 6,
+      "description": "Rush T-shirts",
+      "amount": -625.00,
+      "category": "Recruitment",
+      "date": "2023-09-22T15:30:00.000Z"
+    },
+    {
+      "id": 7,
+      "description": "Brotherhood Bowling Night",
+      "amount": -320.75,
+      "category": "Brotherhood",
+      "date": "2023-09-25T19:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "description": "House Repairs Fundraiser",
+      "amount": 1750.00,
+      "category": "General",
+      "date": "2023-09-28T17:15:00.000Z"
+    },
+    {
+      "id": 9,
+      "description": "Alumni Newsletter Printing",
+      "amount": -175.50,
+      "category": "Alumni",
+      "date": "2023-10-02T11:30:00.000Z"
+    },
+    {
+      "id": 10,
+      "description": "CPR Training Session",
+      "amount": -400.00,
+      "category": "Health and Safety",
+      "date": "2023-10-05T13:00:00.000Z"
+    },
+    {
+      "id": 11,
+      "description": "Pledge Class Pizza Night",
+      "amount": -220.50,
+      "category": "Recruitment",
+      "date": "2023-10-08T18:00:00.000Z"
+    },
+    {
+      "id": 12,
+      "description": "Brotherhood Sports Equipment",
+      "amount": -350.00,
+      "category": "Brotherhood",
+      "date": "2023-10-10T16:45:00.000Z"
+    },
+    {
+      "id": 13,
+      "description": "Donation from Alumni",
+      "amount": 2500.00,
+      "category": "Alumni",
+      "date": "2023-10-12T10:15:00.000Z"
+    },
+    {
+      "id": 14,
+      "description": "Fire Extinguisher Inspection",
+      "amount": -180.00,
+      "category": "Health and Safety",
+      "date": "2023-10-15T14:30:00.000Z"
+    },
+    {
+      "id": 15,
+      "description": "Chapter Meeting Snacks",
+      "amount": -75.25,
+      "category": "General",
+      "date": "2023-10-18T19:30:00.000Z"
+    }
+  ]
+} 

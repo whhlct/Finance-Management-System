@@ -297,12 +297,14 @@ body, html {
 
 .budget-adjustment {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin: 25px 0;
 }
 
 .budget-adjustment input {
   flex: 1;
+  min-width: 150px;
   padding: 12px 15px;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
@@ -310,7 +312,7 @@ body, html {
 }
 
 .budget-adjustment button {
-  padding: 12px 20px;
+  padding: 12px 15px;
   background: #1e3a8a;
   color: white;
   border: none;
@@ -318,10 +320,23 @@ body, html {
   cursor: pointer;
   transition: background 0.2s;
   font-weight: 500;
+  min-width: 150px;
 }
 
-.budget-adjustment button:hover {
-  background: #1e40af;
+.budget-adjustment button:first-of-type {
+  background: #15803d;
+}
+
+.budget-adjustment button:last-of-type {
+  background: #b91c1c;
+}
+
+.budget-adjustment button:first-of-type:hover {
+  background: #166534;
+}
+
+.budget-adjustment button:last-of-type:hover {
+  background: #991b1b;
 }
 
 .budget-quickactions {
@@ -511,6 +526,130 @@ body, html {
   color: #b91c1c;
 }
 
+/* Budget Presets */
+.budget-presets {
+  margin: 20px 0 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.budget-presets h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #1e3a8a;
+}
+
+.preset-selector {
+  display: flex;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.preset-selector select {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  appearance: none;
+  background-color: white;
+}
+
+.preset-selector select:focus {
+  outline: none;
+  border-color: #1e3a8a;
+}
+
+.preset-selector button {
+  padding: 10px 15px;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.preset-selector button:hover:not(:disabled) {
+  background: #1e40af;
+}
+
+.preset-selector button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Custom Increment */
+.custom-increment {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-increment input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.custom-increment input:focus {
+  outline: none;
+  border-color: #1e3a8a;
+}
+
+.increment-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.increment-buttons button {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 1rem;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.increment-buttons button:first-child {
+  color: #b91c1c;
+}
+
+.increment-buttons button:last-child {
+  color: #15803d;
+}
+
+.increment-buttons button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.increment-buttons button:first-child:hover:not(:disabled) {
+  background: #fee2e2;
+}
+
+.increment-buttons button:last-child:hover:not(:disabled) {
+  background: #dcfce7;
+}
+
+.increment-buttons button:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero h1 {
@@ -542,6 +681,19 @@ body, html {
   .primary-btn, .secondary-btn {
     width: 100%;
     max-width: 250px;
+  }
+  
+  .preset-selector {
+    flex-direction: column;
+  }
+  
+  .budget-adjustment {
+    flex-direction: column;
+  }
+  
+  .budget-adjustment input,
+  .budget-adjustment button {
+    width: 100%;
   }
 }
 

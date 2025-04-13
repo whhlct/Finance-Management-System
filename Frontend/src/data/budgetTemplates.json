@@ -1,0 +1,57 @@
+{
+  "defaultBudgets": {
+    "Recruitment": 1500,
+    "Brotherhood": 2000,
+    "Alumni": 800,
+    "Health and Safety": 1200,
+    "General": 3500
+  },
+  "semesterBudgets": {
+    "Fall 2023": {
+      "Recruitment": 2500,
+      "Brotherhood": 3000,
+      "Alumni": 1200,
+      "Health and Safety": 1500,
+      "General": 5000
+    },
+    "Spring 2023": {
+      "Recruitment": 1200,
+      "Brotherhood": 2500,
+      "Alumni": 800,
+      "Health and Safety": 1000,
+      "General": 3000
+    }
+  },
+  "budgetPresets": [
+    {
+      "name": "Rush Week",
+      "budgets": {
+        "Recruitment": 2000,
+        "Brotherhood": 500,
+        "Alumni": 300,
+        "Health and Safety": 800,
+        "General": 1000
+      }
+    },
+    {
+      "name": "Alumni Weekend",
+      "budgets": {
+        "Recruitment": 300,
+        "Brotherhood": 800,
+        "Alumni": 3000,
+        "Health and Safety": 500,
+        "General": 1000
+      }
+    },
+    {
+      "name": "Philanthropy Event",
+      "budgets": {
+        "Recruitment": 300,
+        "Brotherhood": 1000,
+        "Alumni": 500,
+        "Health and Safety": 800,
+        "General": 2500
+      }
+    }
+  ]
+} 
