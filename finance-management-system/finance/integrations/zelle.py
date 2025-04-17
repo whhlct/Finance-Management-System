@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
-
+####DEFUNCT, ZELLE NO LONGER SUPPORTS ITS OWN APP
 
 class ZelleService:
     """
