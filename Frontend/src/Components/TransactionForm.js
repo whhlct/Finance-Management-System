@@ -1,59 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { createTransaction } from '../services/api';
-import { getAccounts } from '../services/api';
 
-const TransactionForm = ({ onTransactionCreated }) => {
+const TransactionForm = ({ addTransaction, categories, defaultCategory }) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [accountId, setAccountId] = useState('');
-  const [accounts, setAccounts] = useState([]);
-  const [error, setError] = useState(null);
+  const [category, setCategory] = useState(defaultCategory || categories[0]);
 
+  // Update category if defaultCategory changes
   useEffect(() => {
-    fetchAccounts();
-  }, []);
-
-  const fetchAccounts = async () => {
-    try {
-      const response = await getAccounts();
-      setAccounts(response.data);
-      if (response.data.length > 0) {
-        setAccountId(response.data[0].id);
-      }
-    } catch (err) {
-      setError('Failed to fetch accounts');
+    if (defaultCategory) {
+      setCategory(defaultCategory);
     }
-  };
+  }, [defaultCategory]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     const amountNum = parseFloat(amount);
     
-    if (description.trim() !== '' && !isNaN(amountNum) && accountId) {
-      try {
-        const newTransaction = {
-          description,
-          amount: amountNum,
-          account: accountId,
-          creator: 1, // Default user ID
-          timestamp: new Date().toISOString()
-        };
-        
-        await createTransaction(newTransaction);
-        setDescription('');
-        setAmount('');
-        // Call the parent's callback to refresh the transaction list
-        if (onTransactionCreated) {
-          onTransactionCreated();
-        }
-      } catch (err) {
-        setError('Failed to create transaction');
-      }
+    if (description.trim() !== '' && !isNaN(amountNum)) {
+      const newTransaction = {
+        id: Math.floor(Math.random() * 1000000),
+        description,
+        amount: amountNum,
+        category,
+        date: new Date().toISOString()
+      };
+      
+      addTransaction(newTransaction);
+      setDescription('');
+      setAmount('');
     }
   };
-
-  if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="transaction-form">
@@ -78,15 +55,13 @@ const TransactionForm = ({ onTransactionCreated }) => {
           />
         </div>
         <div className="form-group">
-          <select
-            value={accountId}
-            onChange={(e) => setAccountId(e.target.value)}
-            required
+          <select 
+            value={category} 
+            onChange={(e) => setCategory(e.target.value)}
+            className="category"
           >
-            {accounts.map((account) => (
-              <option key={account.id} value={account.id}>
-                {account.name}
-              </option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
         </div>
