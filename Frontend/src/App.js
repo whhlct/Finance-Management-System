@@ -23,8 +23,15 @@ function App() {
   
   const [transactions, setTransactions] = useState([]);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [customIncrement, setCustomIncrement] = useState('');
-  const [selectedBudgetPreset, setSelectedBudgetPreset] = useState('');
+  const [budgetInputs, setBudgetInputs] = useState(
+    Object.fromEntries(
+      budgetCategories.map(category => [
+        category, 
+        { amount: '', description: '' }
+      ])
+    )
+  );
+  const [selectedBudgetPreset, setSelectedBudgetPreset] = useState('total');
 
   // Load template transactions
   useEffect(() => {
@@ -77,12 +84,25 @@ function App() {
     });
   };
 
-  // Function to apply a custom increment to a budget
-  const applyCustomIncrement = (category, customValue) => {
-    const amount = parseFloat(customValue);
+  // Update input for a specific category
+  const updateBudgetInput = (category, field, value) => {
+    setBudgetInputs({
+      ...budgetInputs,
+      [category]: {
+        ...budgetInputs[category],
+        [field]: value
+      }
+    });
+  };
+
+  // Apply budget adjustment and clear inputs
+  const applyBudgetAdjustment = (category, isIncrease) => {
+    const amount = parseFloat(budgetInputs[category].amount);
     if (!isNaN(amount)) {
-      adjustBudget(category, amount);
-      setCustomIncrement('');
+      adjustBudget(category, isIncrease ? amount : -amount);
+      // Clear inputs for this category only
+      updateBudgetInput(category, 'amount', '');
+      updateBudgetInput(category, 'description', '');
     }
   };
 
@@ -113,20 +133,22 @@ function App() {
                 value={selectedBudgetPreset} 
                 onChange={(e) => setSelectedBudgetPreset(e.target.value)}
               >
-                <option value="">Select Budget Preset</option>
+                <option value="total">Total Budget</option>
                 {budgetTemplatesData.budgetPresets.map((preset, index) => (
                   <option key={index} value={preset.name}>{preset.name}</option>
                 ))}
               </select>
               <button 
                 onClick={() => {
-                  if (selectedBudgetPreset) {
+                  if (selectedBudgetPreset === 'total') {
+                    // Reset to original total budget
+                    setBudgets(budgetTemplatesData.defaultBudgets);
+                  } else if (selectedBudgetPreset) {
                     applyBudgetPreset(selectedBudgetPreset);
                   }
                 }}
-                disabled={!selectedBudgetPreset}
               >
-                Apply Preset
+                Apply
               </button>
             </div>
           </div>
@@ -157,31 +179,35 @@ function App() {
                 <div key={category} className="budget-card">
                   <h3>{category}</h3>
                   <p className="budget-amount">${budgets[category].toFixed(2)}</p>
-                  <div className="custom-increment">
+                  <div className="budget-adjustment">
                     <input
                       type="number"
-                      placeholder="Custom amount"
-                      value={customIncrement}
-                      onChange={(e) => setCustomIncrement(e.target.value)}
+                      placeholder="Enter amount"
+                      value={budgetInputs[category].amount}
+                      onChange={(e) => updateBudgetInput(category, 'amount', e.target.value)}
                     />
-                    <div className="increment-buttons">
+                    <input
+                      type="text"
+                      placeholder="Description"
+                      value={budgetInputs[category].description}
+                      onChange={(e) => updateBudgetInput(category, 'description', e.target.value)}
+                    />
+                    <div className="budget-buttons">
                       <button 
-                        onClick={() => applyCustomIncrement(category, '-' + Math.abs(parseFloat(customIncrement) || 0))}
-                        disabled={!customIncrement}
+                        onClick={() => applyBudgetAdjustment(category, false)}
+                        disabled={!budgetInputs[category].amount}
+                        className="decrease-btn"
                       >
-                        -
+                        Decrease
                       </button>
                       <button 
-                        onClick={() => applyCustomIncrement(category, Math.abs(parseFloat(customIncrement) || 0))}
-                        disabled={!customIncrement}
+                        onClick={() => applyBudgetAdjustment(category, true)}
+                        disabled={!budgetInputs[category].amount}
+                        className="increase-btn"
                       >
-                        +
+                        Increase
                       </button>
                     </div>
-                  </div>
-                  <div className="budget-controls">
-                    <button onClick={() => adjustBudget(category, -50)}>-$50</button>
-                    <button onClick={() => adjustBudget(category, 50)}>+$50</button>
                   </div>
                 </div>
               ))}
@@ -194,26 +220,31 @@ function App() {
                 <input 
                   type="number" 
                   placeholder="Enter amount" 
-                  id="budgetAmount" 
+                  value={budgetInputs[activeCategory].amount}
+                  onChange={(e) => updateBudgetInput(activeCategory, 'amount', e.target.value)}
                 />
-                <button onClick={() => {
-                  const amount = parseFloat(document.getElementById('budgetAmount').value);
-                  if (!isNaN(amount)) {
-                    adjustBudget(activeCategory, amount);
-                    document.getElementById('budgetAmount').value = '';
-                  }
-                }}>
-                  Add to Budget
-                </button>
-                <button onClick={() => {
-                  const amount = parseFloat(document.getElementById('budgetAmount').value);
-                  if (!isNaN(amount)) {
-                    adjustBudget(activeCategory, -amount);
-                    document.getElementById('budgetAmount').value = '';
-                  }
-                }}>
-                  Subtract from Budget
-                </button>
+                <input 
+                  type="text" 
+                  placeholder="Description" 
+                  value={budgetInputs[activeCategory].description}
+                  onChange={(e) => updateBudgetInput(activeCategory, 'description', e.target.value)}
+                />
+                <div className="budget-buttons">
+                  <button 
+                    onClick={() => applyBudgetAdjustment(activeCategory, false)}
+                    disabled={!budgetInputs[activeCategory].amount}
+                    className="decrease-btn"
+                  >
+                    Decrease
+                  </button>
+                  <button 
+                    onClick={() => applyBudgetAdjustment(activeCategory, true)}
+                    disabled={!budgetInputs[activeCategory].amount}
+                    className="increase-btn"
+                  >
+                    Increase
+                  </button>
+                </div>
               </div>
               <div className="budget-quickactions">
                 <button onClick={() => adjustBudget(activeCategory, -100)}>-$100</button>

@@ -1,0 +1,15 @@
+{
+  "name": "finance-management-system",
+  "version": "1.0.0",
+  "description": "Finance Management System with Frontend and Backend",
+  "scripts": {
+    "start": "concurrently \"cd Frontend && npm start\" \"cd Backend && python manage.py runserver\"",
+    "install-all": "npm install && cd Frontend && npm install && cd ../Backend && pip install -r requirements.txt",
+    "frontend": "cd Frontend && npm start",
+    "backend": "cd Backend && python manage.py runserver",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 
