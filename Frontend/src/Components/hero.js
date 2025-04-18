@@ -8,11 +8,10 @@ const Hero = ({ totalBudget = 1000, categoriesCount = 5 }) => {
   return (
     <header className="hero">
       <div className="hero-content">
-        <h1>Fraternity Finance Tracker</h1>
-        <p>Easily track and manage our chapter's finances - no more spreadsheet headaches!</p>
         <div className="hero-buttons">
           <button onClick={scrollToContent} className="primary-btn">Manage Budget</button>
           <button onClick={scrollToContent} className="secondary-btn">View Transactions</button>
+          <button onClick={() => {}} className="secondary-btn">Login</button>
         </div>
         <div className="hero-stats">
           <div className="stat-item">
