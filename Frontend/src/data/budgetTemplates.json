@@ -4,7 +4,10 @@
     "Brotherhood": 2000,
     "Alumni": 800,
     "Health and Safety": 1200,
-    "General": 3500
+    "New Member": 1000,
+    "Philanthropy": 800,
+    "Marketing": 700,
+    "Housing": 1000
   },
   "semesterBudgets": {
     "Fall 2023": {
@@ -12,14 +15,20 @@
       "Brotherhood": 3000,
       "Alumni": 1200,
       "Health and Safety": 1500,
-      "General": 5000
+      "New Member": 1500,
+      "Philanthropy": 1200,
+      "Marketing": 1000,
+      "Housing": 1500
     },
     "Spring 2023": {
       "Recruitment": 1200,
       "Brotherhood": 2500,
       "Alumni": 800,
       "Health and Safety": 1000,
-      "General": 3000
+      "New Member": 1000,
+      "Philanthropy": 800,
+      "Marketing": 600,
+      "Housing": 800
     }
   },
   "budgetPresets": [
@@ -30,7 +39,10 @@
         "Brotherhood": 500,
         "Alumni": 300,
         "Health and Safety": 800,
-        "General": 1000
+        "New Member": 1500,
+        "Philanthropy": 200,
+        "Marketing": 600,
+        "Housing": 300
       }
     },
     {
@@ -40,7 +52,10 @@
         "Brotherhood": 800,
         "Alumni": 3000,
         "Health and Safety": 500,
-        "General": 1000
+        "New Member": 200,
+        "Philanthropy": 400,
+        "Marketing": 500,
+        "Housing": 300
       }
     },
     {
@@ -50,7 +65,10 @@
         "Brotherhood": 1000,
         "Alumni": 500,
         "Health and Safety": 800,
-        "General": 2500
+        "New Member": 200,
+        "Philanthropy": 2000,
+        "Marketing": 800,
+        "Housing": 200
       }
     }
   ]

@@ -15,7 +15,10 @@ function App() {
     'Brotherhood',
     'Alumni',
     'Health and Safety',
-    'General'
+    'New Member',
+    'Philanthropy',
+    'Marketing',
+    'Housing'
   ];
 
   // State for each budget category
