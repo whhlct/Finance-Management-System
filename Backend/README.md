@@ -34,3 +34,23 @@ The server can be ran using the file `manage.py`, with the following command:
 uv run manage.py runserver
 ```
 When the server is started with this command, it supports automatic reloading, meaning you don't need to restart the server when you make changes to the code. However, some actions like adding files don't trigger a restart, so you may need to restart the server in these cases.
+
+## Starting migrations
+
+When changing the data model, migrations need to be made and applied for database version history.
+
+### Create migration
+
+```
+uv run manage.py makemigrations
+```
+
+This will create migration files reflecting the changes.
+
+### Apply migration
+
+```
+uv run manage.py migrate
+```
+
+This will sync the local db to the migration history.
