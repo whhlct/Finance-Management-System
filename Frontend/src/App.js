@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Hero from './components/hero';
-import TransactionForm from './components/TransactionForm';
-import TransactionList from './components/TransactionList';
-import ReimbursementForm from './components/ReimbursementForm';
-import ReimbursementList from './components/ReimbursementList';
+import Hero from './Components/hero';
+import TransactionForm from './Components/TransactionForm';
+import TransactionList from './Components/TransactionList';
+import ReimbursementFormComponent from './Components/ReimbursementFormComponent';
+import ReimbursementListComponent from './Components/ReimbursementListComponent';
 import './App.css';
 
 // Import template data
@@ -27,7 +27,41 @@ function App() {
   const [budgets, setBudgets] = useState(budgetTemplatesData.defaultBudgets);
   
   const [transactions, setTransactions] = useState([]);
-  const [reimbursements, setReimbursements] = useState([]);
+  const [reimbursements, setReimbursements] = useState([
+    {
+      id: 1,
+      name: 'John Smith',
+      email: 'john.smith@example.com',
+      description: 'Recruitment event supplies and food',
+      amount: 145.75,
+      category: 'Recruitment',
+      receipt: 'receipt_1.pdf',
+      date: '2025-04-15T14:22:18.234Z',
+      status: 'Pending'
+    },
+    {
+      id: 2,
+      name: 'Michael Johnson',
+      email: 'mjohnson@example.com',
+      description: 'Brotherhood retreat transportation expenses',
+      amount: 230.50,
+      category: 'Brotherhood',
+      receipt: 'No receipt attached',
+      date: '2025-04-10T09:45:12.123Z',
+      status: 'Approved'
+    },
+    {
+      id: 3,
+      name: 'Emily Williams',
+      email: 'ewilliams@example.com',
+      description: 'Philanthropy event decorations and materials',
+      amount: 87.25,
+      category: 'Philanthropy',
+      receipt: 'receipt_3.jpg',
+      date: '2025-04-18T16:30:45.678Z',
+      status: 'Rejected'
+    }
+  ]);
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeTab, setActiveTab] = useState('budget'); // 'budget', 'transactions', 'reimbursements'
   const [budgetInputs, setBudgetInputs] = useState(
@@ -212,7 +246,6 @@ function App() {
                   <button 
                     onClick={() => {
                       if (selectedBudgetPreset === 'total') {
-                        // Reset to original total budget
                         setBudgets(budgetTemplatesData.defaultBudgets);
                       } else if (selectedBudgetPreset) {
                         applyBudgetPreset(selectedBudgetPreset);
@@ -342,11 +375,11 @@ function App() {
         {activeTab === 'reimbursements' && (
           <div className="reimbursements-section">
             <div className="reimbursements-container">
-              <ReimbursementForm 
+              <ReimbursementFormComponent 
                 categories={budgetCategories}
                 addReimbursement={addReimbursement}
               />
-              <ReimbursementList 
+              <ReimbursementListComponent 
                 reimbursements={reimbursements}
                 updateReimbursementStatus={updateReimbursementStatus}
               />
