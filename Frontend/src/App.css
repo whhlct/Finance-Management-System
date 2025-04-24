@@ -778,3 +778,233 @@ body, html {
     margin: 0 auto;
   }
 }
+
+/* Main tab navigation */
+.main-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-tabs button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.main-tabs button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.main-tabs button.active {
+  border-bottom-color: #3498db;
+  font-weight: bold;
+}
+
+/* Reimbursement form */
+.reimbursement-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.reimbursement-form h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.reimbursement-form .form-group {
+  margin-bottom: 15px;
+}
+
+.reimbursement-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.reimbursement-form input,
+.reimbursement-form select,
+.reimbursement-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.reimbursement-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.reimbursement-form .submit-btn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.reimbursement-form .submit-btn:hover {
+  background-color: #2980b9;
+}
+
+.reimbursement-form .file-selected {
+  font-size: 0.9rem;
+  color: #27ae60;
+  margin-top: 5px;
+}
+
+.reimbursement-form .success-message {
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.reimbursement-form .error-message {
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+/* Reimbursement list */
+.reimbursement-list {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.reimbursement-list h2 {
+  margin-top: 0;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.reimbursements-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.reimbursements-table th,
+.reimbursements-table td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.reimbursements-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.reimbursements-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.reimbursements-table .description {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reimbursements-table .amount {
+  font-weight: 500;
+}
+
+.reimbursements-table .status-pending {
+  color: #f39c12;
+}
+
+.reimbursements-table .status-approved {
+  color: #27ae60;
+}
+
+.reimbursements-table .status-rejected {
+  color: #e74c3c;
+}
+
+.reimbursements-table .status-paid {
+  color: #2980b9;
+}
+
+.reimbursements-table .actions button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: white;
+}
+
+.reimbursements-table .approve-btn {
+  background-color: #27ae60;
+}
+
+.reimbursements-table .reject-btn {
+  background-color: #e74c3c;
+}
+
+.reimbursements-table .paid-btn {
+  background-color: #3498db;
+}
+
+.reimbursements-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.transactions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+  .main-tabs button {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .reimbursements-table {
+    font-size: 0.8rem;
+  }
+  
+  .reimbursements-table th,
+  .reimbursements-table td {
+    padding: 8px 6px;
+  }
+  
+  .reimbursements-table .description {
+    max-width: 100px;
+  }
+}
